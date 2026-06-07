@@ -25,7 +25,7 @@ pipeline {
                 echo "Running on a Linux / Unix agent"
                 sh 'echo "Hello from Linux!"'
                 sh 'pip install -r requirements.txt'
-                sh 'playwright install chrome firefox'
+                sh 'playwright install chromium firefox'
             }
         }
 
@@ -39,7 +39,7 @@ pipeline {
                 bat 'cd'
                 bat 'dir'
                 bat 'C:\\Users\\bhall\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -m pip install -r requirements.txt'
-                bat 'C:\\Users\\bhall\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -m playwright install chromium'
+                bat 'C:\\Users\\bhall\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -m playwright install chromium firefox'
             }
         }
 
