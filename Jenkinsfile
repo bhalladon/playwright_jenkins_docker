@@ -28,15 +28,15 @@ pipeline {
             steps {
                 echo "Running on a Windows agent"
                 bat 'echo Hello from Windows!'
-                bat 'pip install -r requirements.txt'
-                bat 'playwright install --with-deps chromium'
+                bat 'py -m pip install -r requirements.txt'
+                bat 'py -m playwright install chromium'
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'mkdir -p screenshots'
-                sh 'pytest tests/ --tb=short -v'
+                bat 'mkdir -p screenshots'
+                bat 'py -m pytest tests/ --tb=short -v'
             }
         }
     }
