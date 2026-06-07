@@ -43,13 +43,13 @@ pipeline {
     }
 
     post {
-        always {
-            archiveArtifacts artifacts: 'screenshots/*.png', allowEmptyArchive: true
-            allure([
-                includeProperties: false,
-                reportBuildPolicy: 'ALWAYS',
-                results: [[path: 'allure-results']]
-            ])
-        }
+    always {
+        archiveArtifacts artifacts: 'screenshots/*.png', allowEmptyArchive: true
+        allure([
+            includeProperties: false,
+            reportBuildPolicy: 'ALWAYS',
+            commandline: 'allure',
+            results: [[path: 'allure-results']]
+        ])}
     }
 }
