@@ -25,7 +25,7 @@ def pytest_runtest_makereport(item, call):
     setattr(item, f"rep_{rep.when}", rep)
 
 
-@pytest.fixture(scope="session", params=["chrome", "firefox"])
+@pytest.fixture(scope="session", params=["chrome"])
 def browser(request):
     # browser_name = request.param
     browser_name = os.getenv("WEB_BROWSER")
