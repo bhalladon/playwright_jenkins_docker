@@ -37,7 +37,6 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                bat 'mkdir -p screenshots'
                 bat 'C:\\Users\\bhall\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -m pytest tests/ --tb=short -v'
             }
         }
