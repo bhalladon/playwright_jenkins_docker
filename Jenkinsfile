@@ -7,6 +7,14 @@ pipeline {
         HEADLESS    = 'true'
     }
 
+    parameters {
+    choice(
+            name: 'WEB_BROWSER',
+            choices: ['chrome', 'firefox', 'edge'],
+            description: 'Select a web browser where you want to execute the tests'
+        )
+}
+
     stages {
 
         stage('Linux Tasks') {
@@ -17,7 +25,7 @@ pipeline {
                 echo "Running on a Linux / Unix agent"
                 sh 'echo "Hello from Linux!"'
                 sh 'pip install -r requirements.txt'
-                sh 'playwright install --with-deps chromium'
+                sh 'playwright install chrome firefox'
             }
         }
 
