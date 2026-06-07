@@ -8,10 +8,28 @@ pipeline {
     }
 
     stages {
-        stage('Install Dependencies') {
+
+        stage('Linux Tasks') {
+            when {
+                expression { isUnix() }
+            }
             steps {
+                echo "Running on a Linux / Unix agent"
+                sh 'echo "Hello from Linux!"'
                 sh 'pip install -r requirements.txt'
                 sh 'playwright install --with-deps chromium'
+            }
+        }
+
+        stage('Windows Tasks') {
+            when {
+                expression { !isUnix() }
+            }
+            steps {
+                echo "Running on a Windows agent"
+                bat 'echo Hello from Windows!'
+                bat 'pip install -r requirements.txt'
+                bat 'playwright install --with-deps chromium'
             }
         }
 
