@@ -37,7 +37,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                bat 'C:\\Users\\bhall\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -m pytest tests/ --tb=short -v'
+                bat 'C:\\Users\\bhall\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -m pytest tests/ --tb=short -v --allure-dir=allure-results'
             }
         }
     }
@@ -45,6 +45,11 @@ pipeline {
     post {
         always {
             archiveArtifacts artifacts: 'screenshots/*.png', allowEmptyArchive: true
+            allure([
+                includeProperties: false,
+                reportBuildPolicy: 'ALWAYS',
+                results: [[path: 'allure-results']]
+            ])
         }
     }
 }
