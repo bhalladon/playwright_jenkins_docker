@@ -18,7 +18,7 @@ def test_google_search(page):
 @allure.parent_suite("UI")
 @allure.description("Check page title")
 def test_page_tile(page):
-    allure.step("Checking page title")
+    allure.step("Step1: Checking page title")
     expect(page).to_have_title("Automation Testing Practice")
 
 
