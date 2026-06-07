@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'jenkins_test'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+    agent any
 
     environment {
         WEB_BROWSER = 'chrome'
