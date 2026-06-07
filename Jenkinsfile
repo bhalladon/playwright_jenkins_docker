@@ -28,15 +28,15 @@ pipeline {
             steps {
                 echo "Running on a Windows agent"
                 bat 'echo Hello from Windows!'
-                bat 'C:\Users\bhall\AppData\Local\Microsoft\WindowsApps\python3.exe -m pip install -r requirements.txt'
-                bat 'C:\Users\bhall\AppData\Local\Microsoft\WindowsApps\python3.exe -m playwright install chromium'
+                bat 'C:\\Users\bhall\\AppData\Local\\Microsoft\\WindowsApps\\python3.exe -m pip install -r requirements.txt'
+                bat 'C:\\Users\\bhall\\AppData\\Local\\Microsoft\\WindowsApps\\python3.exe -m playwright install chromium'
             }
         }
 
         stage('Run Tests') {
             steps {
                 bat 'mkdir -p screenshots'
-                bat 'C:\Users\bhall\AppData\Local\Microsoft\WindowsApps\python3.exe -m pytest tests/ --tb=short -v'
+                bat 'C:\\Users\\bhall\\AppData\\Local\\Microsoft\\WindowsApps\\python3.exe -m pytest tests/ --tb=short -v'
             }
         }
     }
