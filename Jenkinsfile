@@ -37,7 +37,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                bat 'C:\\Users\\bhall\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -m pytest tests/ --tb=short -v --allure-dir=allure-results'
+                bat 'C:\\Users\\bhall\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -m pytest tests/ --tb=short -v --alluredir=allure-results'
             }
         }
     }
