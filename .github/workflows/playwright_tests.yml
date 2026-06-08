@@ -13,19 +13,20 @@ on:
         default: 'chrome'
         type: choice
         options: [ chrome, firefox, edge ]
-
       TEST_TYPE:
         description: 'Select test suite'
         required: true
         default: 'ALL'
         type: choice
         options: [ ALL, UI, API ]
-
       PYTEST_MARKER:
-        description: 'Enter pytest marker expression (e.g., smoke, regression, api, ui")'
+        description: 'Enter pytest marker expression (e.g., smoke, regression, api, ui)'
         required: false
         default: ''
         type: string
+
+permissions:
+  contents: write
 
 jobs:
   test:
@@ -61,12 +62,12 @@ jobs:
 
       - name: Generate Allure report
         if: always()
-        uses: simple-elf/allure-report-action@v1
+        uses: mgrybyk/allure-report-branch-action@v1
+        id: allure
         with:
-          allure_results: allure-results
-          allure_report: allure-results
-          allure_history: allure-history
-          keep_reports: 20
+          report_id: 'playwright-tests'
+          gh_pages: 'gh-pages'
+          report_dir: allure-results
 
       - name: Deploy Allure report to GitHub Pages
         if: always()
@@ -74,4 +75,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: allure-results
+          publish_dir: ./allure-report
+          keep_files: true
