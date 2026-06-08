@@ -1,0 +1,4 @@
+
+Setting up for test: test_upload_single_file[chrome]
+Executing test: test_upload_single_file[chrome]
+Tearing down after test: test_upload_single_file[chrome]
