@@ -1,2 +1,4 @@
 allure-results/*
 screenshots/*
+.idea/*
+*.pyc
