@@ -36,7 +36,8 @@ pipeline {
             steps {
                 echo "Running on a Windows agent"
                 script {
-                    env.PYTHON_PATH = bat(script: 'where python', returnStdout: true).trim().readLines().first()
+                    def rawOutput = bat(script: 'where python', returnStdout: true).trim()
+                    env.PYTHON_PATH = rawOutput.tokenize('\n').last().trim()
                     echo "Python found at: ${env.PYTHON_PATH}"
                 }
                 echo "${PYTHON_PATH}"
