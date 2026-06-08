@@ -1,0 +1,4 @@
+
+Setting up for test: test_mouse_hover[chrome]
+Executing test: test_mouse_hover[chrome]
+Tearing down after test: test_mouse_hover[chrome]
