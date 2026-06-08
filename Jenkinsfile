@@ -39,14 +39,14 @@ pipeline {
                     env.PYTHON_PATH = bat(script: 'where python', returnStdout: true).trim().readLines().first()
                     echo "Python found at: ${env.PYTHON_PATH}"
                 }
-                bat '"${PYTHON_PATH}" -m pip install -r requirements.txt'
-                bat '"${PYTHON_PATH}" -m playwright install chromium firefox'
+                bat "\"${env.PYTHON_PATH}\" -m pip install -r requirements.txt"
+                bat "\"${env.PYTHON_PATH}\" -m playwright install chromium firefox"
             }
         }
 
         stage('Run Tests') {
             steps {
-                bat '"${PYTHON_PATH}" -m pytest tests/ --tb=short -v --alluredir=allure-results'
+                bat "\"${PYTHON_PATH}\" -m pytest tests/ --tb=short -v --alluredir=allure-results'
             }
         }
     }
