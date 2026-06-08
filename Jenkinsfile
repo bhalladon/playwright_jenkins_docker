@@ -39,7 +39,7 @@ pipeline {
                     env.PYTHON_PATH = bat(script: 'where python', returnStdout: true).trim().readLines().first()
                     echo "Python found at: ${env.PYTHON_PATH}"
                 }
-                echo "${PYTHON_PATH}""
+                echo "${PYTHON_PATH}"
 //                 bat "\"${env.PYTHON_PATH}\" -m pip install -r requirements.txt"
 //                 bat "\"${env.PYTHON_PATH}\" -m playwright install chromium firefox"
             }
