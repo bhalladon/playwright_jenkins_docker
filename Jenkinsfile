@@ -35,17 +35,18 @@ pipeline {
             }
             steps {
                 echo "Running on a Windows agent"
-                bat 'echo Hello from Windows!'
-                bat 'cd'
-                bat 'dir'
-                bat 'C:\\Users\\bhall\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -m pip install -r requirements.txt'
-                bat 'C:\\Users\\bhall\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -m playwright install chromium firefox'
+                script {
+                    env.PYTHON_PATH = bat(script: 'where python', returnStdout: true).trim().readLines().first()
+                    echo "Python found at: ${env.PYTHON_PATH}"
+                }
+                bat '"${PYTHON_PATH}" -m pip install -r requirements.txt'
+                bat '"${PYTHON_PATH}" -m playwright install chromium firefox'
             }
         }
 
         stage('Run Tests') {
             steps {
-                bat 'C:\\Users\\bhall\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -m pytest tests/ --tb=short -v --alluredir=allure-results'
+                bat '"${PYTHON_PATH}" -m pytest tests/ --tb=short -v --alluredir=allure-results'
             }
         }
     }

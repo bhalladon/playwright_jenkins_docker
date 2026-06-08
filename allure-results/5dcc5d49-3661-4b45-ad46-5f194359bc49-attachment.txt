@@ -1,4 +1,0 @@
-
-Setting up for test: test_page_tile[chrome]
-Executing test: test_page_tile[chrome]
-Tearing down after test: test_page_tile[chrome]
