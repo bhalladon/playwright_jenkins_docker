@@ -59,9 +59,19 @@ jobs:
           name: screenshots
           path: screenshots/*.png
 
-      - name: Upload Allure results
+      - name: Generate Allure report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: simple-elf/allure-report-action@v1
         with:
-          name: allure-results
-          path: allure-results/
+          allure_results: allure-results
+          allure_report: allure-report
+          allure_history: allure-history
+          keep_reports: 20
+
+      - name: Deploy Allure report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-report
