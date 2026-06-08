@@ -14,6 +14,19 @@ on:
         type: choice
         options: [ chrome, firefox, edge ]
 
+      TEST_TYPE:
+        description: 'Select test suite'
+        required: true
+        default: 'ALL'
+        type: choice
+        options: [ ALL, UI, API ]
+
+      PYTEST_MARKER:
+        description: 'Enter pytest marker expression (e.g., smoke, regression, api, ui")'
+        required: false
+        default: ''
+        type: string
+
 jobs:
   test:
     runs-on: ubuntu-latest

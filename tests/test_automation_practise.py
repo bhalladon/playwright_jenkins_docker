@@ -4,6 +4,7 @@ from playwright.sync_api import expect
 from pom.automation_practise_home_page import *
 
 
+@pytest.mark.ui
 class TestAutomationPractise:
 
     @pytest.mark.usefixtures("login")

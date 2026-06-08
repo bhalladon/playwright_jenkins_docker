@@ -13,6 +13,16 @@ pipeline {
             choices: ['chrome', 'firefox', 'edge'],
             description: 'Select a web browser where you want to execute the tests'
         )
+    choice(
+            name: 'TEST_TYPE',
+            choices: ['ALL', 'UI', 'API'],
+            description: 'Select the type of tests to run'
+       )
+    string(
+            name: 'PYTEST_MARKER',
+            defaultValue: '',
+            description: 'Enter pytest marker expression (e.g., smoke, regression, api, ui")'
+          )
 }
 
     stages {
@@ -48,7 +58,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                bat "${PYTHON_PATH} -m pytest tests/ --tb=short -v --alluredir=allure-results"
+                bat "${PYTHON_PATH} -m pytest tests/ ${params.PYTEST_MARKER} --tb=short -v --alluredir=allure-results"
                    echo "Run tests"
             }
         }
