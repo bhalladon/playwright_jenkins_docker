@@ -1,4 +1,13 @@
-playwright~=1.60.0
+# --- Core Testing Framework ---
 pytest~=9.0.3
+requests~=2.34.2
+pytest-xdist~=3.6.1
+
+# --- Web Automation ---
+playwright~=1.60.0
+
+# --- Utilities & Helpers ---
 python-dotenv~=1.2.2
+
+# --- Reporting ---
 allure-pytest~=2.16.0

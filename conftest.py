@@ -2,6 +2,7 @@ import os
 import pytest
 from dotenv import load_dotenv
 from playwright.sync_api import sync_playwright
+from api.api_client import ApiClient
 
 load_dotenv()
 
@@ -128,3 +129,7 @@ def pytest_collection_modifyitems(config, items):
         if "slow" in item.keywords.node.name and not config.getoption("--runslow"):
             print("Skipping Test")
             item.add_marker(pytest.mark.skip(reason="need --runslow option to run"))
+
+@pytest.fixture(scope="session")
+def api_client():
+    return ApiClient()

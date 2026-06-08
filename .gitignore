@@ -1,4 +1,37 @@
-allure-results/*
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.pytest_cache/
+.cache/
+
+# --- IDE / Editor (PyCharm, VS Code) ---
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+*.ids
+
+# --- Allure Test Artifacts ---
+# Exclude raw Allure results (JSON/TXT) as they are ephemeral.
+# Only commit the final generated HTML reports if you host them statically.
+allure-results/
+
+# Screenshot
 screenshots/*
-.idea/*
-*.pyc
+
+# Logs
+*.log
+
+# --- Operating System ---
+.DS_Store
+Thumbs.db
+
