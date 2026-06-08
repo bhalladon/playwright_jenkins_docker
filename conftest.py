@@ -54,6 +54,11 @@ def open_app_url(page):
     page.goto(os.getenv("APP_URL"))
 
 
+@pytest.fixture(scope="function")
+def login(username, password):
+    print("login successful with", username, password)
+
+
 def pytest_sessionstart(session):
     """
     Called after the Session object has been created and before performing collection and entering the run test loop.

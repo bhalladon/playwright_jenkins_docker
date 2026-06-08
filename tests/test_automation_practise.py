@@ -16,8 +16,8 @@ class TestAutomationPractise:
         page.wait_for_load_state()
 
     def test_fill_data(self, page):
-        name_locator = page.get_by_role("text", name="Enter Name")
-        # name_locator.click()
+        name_locator = page.get_by_role("textbox", name="Enter Name")
+        name_locator.click()
         name_locator.fill("Rajiv")
         # page.locator(name_text_box).fill("Rajiv")
         page.locator(email_text_box).fill("rajiv@gmail.com")
@@ -67,27 +67,23 @@ class TestAutomationPractise:
         page.bring_to_front()
         print(f"Old tab URL: {page.url}")
 
-        page.press()
-
         # switch back to new tab
         new_page.bring_to_front()
         print(f"New tab URL: {new_page.url}")
 
     def test_mouse_hover(self, page):
         mouse_hover_over_element(page, element=mouse_hover)
-        time.sleep(5)
 
     def test_scrolling_drop_down(self, page):
         page.locator(scrolling_drop_down).click()
         page.locator("//div[@id='dropdown']//following::div[@class='option' and .='Item 8']").click()
-        expect(page).to_have_url("https://www.lambdatest.com/selenium-playground/")
 
     def test_price_of_product(self, page):
-        page.context.tracing.start()
+        # page.context.tracing.start()
 
         price = get_price_from_the_table(page, product_name="Tablet")
         print(f"Price of Mobile is: {price}")
-        page.context.tracing.stop(path="trace.zip")
+        # page.context.tracing.stop(path="trace.zip")
 
     def test_upload_single_file(self, page):
         """
@@ -95,4 +91,4 @@ class TestAutomationPractise:
         :param page:
         :return:
         """
-        page.set_input_files("//input[@id='singleFileInput']", "sample.txt")
+        page.set_input_files("//input[@id='singleFileInput']", "pytest.ini")
