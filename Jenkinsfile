@@ -74,33 +74,21 @@ pipeline {
                 commandline: 'allure',
                 results: [[path: 'allure-results']]
             ])
-        }
-        success {
-            slackSend(
-                channel: '#qa-demo',
-                color: 'qa-demo',
-                message: "✅ *BUILD PASSED* — ${env.JOB_NAME} #${env.BUILD_NUMBER}\n" +
-                         "Browser: ${params.WEB_BROWSER} | Tests: ${params.TEST_TYPE}\n" +
-                         "🔗 <${env.BUILD_URL}|View Build>"
-            )
-        }
-        failure {
-            slackSend(
-                channel: '#qa-demo',
-                color: 'danger',
-                message: "❌ *BUILD FAILED* — ${env.JOB_NAME} #${env.BUILD_NUMBER}\n" +
-                         "Browser: ${params.WEB_BROWSER} | Tests: ${params.TEST_TYPE}\n" +
-                         "🔗 <${env.BUILD_URL}|View Build>"
-            )
-        }
-        unstable {
-            slackSend(
-                channel: '#qa-demo',
-                color: 'warning',
-                message: "⚠️ *BUILD UNSTABLE* — ${env.JOB_NAME} #${env.BUILD_NUMBER}\n" +
-                         "Browser: ${params.WEB_BROWSER} | Tests: ${params.TEST_TYPE}\n" +
-                         "🔗 <${env.BUILD_URL}|View Build>"
-            )
+            script {
+                def statusMap = [
+                    SUCCESS : [color: 'good',    emoji: '✅', text: 'BUILD PASSED'],
+                    FAILURE : [color: 'danger',  emoji: '❌', text: 'BUILD FAILED'],
+                    UNSTABLE: [color: 'warning', emoji: '⚠️', text: 'BUILD UNSTABLE']
+                ]
+                def s = statusMap[currentBuild.currentResult] ?: [color: 'warning', emoji: '❓', text: currentBuild.currentResult]
+                slackSend(
+                    channel: '#qa-demo',
+                    color: s.color,
+                    message: "${s.emoji} *${s.text}* — ${env.JOB_NAME} #${env.BUILD_NUMBER}\n" +
+                             "Browser: ${params.WEB_BROWSER} | Tests: ${params.TEST_TYPE}\n" +
+                             "🔗 <${env.BUILD_URL}|View Build>"
+                )
+            }
         }
     }
 }
