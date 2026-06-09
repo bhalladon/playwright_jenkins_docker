@@ -59,7 +59,7 @@ playwright install chrome
 
 ### Configure environment
 
-Create a `.env` file in the project root (already provided):
+Create a `.env` file in the project root for local test execution:
 
 ```env
 WEB_BROWSER=chrome
@@ -255,6 +255,7 @@ Steps:
 8. Deploy Allure report to **GitHub Pages** (`gh-pages` branch), keeping last 20 reports
 
 > Set `APP_URL` as a GitHub repository secret for use in CI.
+> Set `API_BASE_URL` as a GitHub repository secret for use in CI.
 
 ---
 
