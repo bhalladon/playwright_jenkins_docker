@@ -1,0 +1,7 @@
+
+Setting up for test: test_new_tab[chrome]
+Executing test: test_new_tab[chrome]
+New tab URL: https://www.pavantestingtools.com/
+Old tab URL: https://testautomationpractice.blogspot.com/
+New tab URL: https://www.pavantestingtools.com/
+Tearing down after test: test_new_tab[chrome]
