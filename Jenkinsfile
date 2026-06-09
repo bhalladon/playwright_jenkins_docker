@@ -4,6 +4,7 @@ pipeline {
     environment {
         WEB_BROWSER = 'chrome'
         APP_URL     = 'https://testautomationpractice.blogspot.com/'
+        API_BASE_URL = "https://jsonplaceholder.typicode.com"
         HEADLESS    = 'true'
     }
 
