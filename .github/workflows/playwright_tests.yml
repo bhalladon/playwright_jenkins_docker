@@ -36,6 +36,7 @@ jobs:
       WEB_BROWSER: ${{ github.event.inputs.WEB_BROWSER || 'chrome' }}
       APP_URL: ${{ secrets.APP_URL }}
       API_BASE_URL: ${{ secrets.API_BASE_URL }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       HEADLESS: 'true'
 
     steps:
@@ -91,6 +92,7 @@ jobs:
       - name: Slack Notification
         if: always()
         uses: slackapi/slack-github-action@v1.27.0
+        continue-on-error: true
         with:
           payload: |
             {
