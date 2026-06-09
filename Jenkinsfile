@@ -66,13 +66,41 @@ pipeline {
     }
 
     post {
-    always {
-        archiveArtifacts artifacts: 'screenshots/*.png', allowEmptyArchive: true
-        allure([
-            includeProperties: false,
-            reportBuildPolicy: 'ALWAYS',
-            commandline: 'allure',
-            results: [[path: 'allure-results']]
-        ])}
+        always {
+            archiveArtifacts artifacts: 'screenshots/*.png', allowEmptyArchive: true
+            allure([
+                includeProperties: false,
+                reportBuildPolicy: 'ALWAYS',
+                commandline: 'allure',
+                results: [[path: 'allure-results']]
+            ])
+        }
+        success {
+            slackSend(
+                channel: '#qa-demo',
+                color: 'qa-demo',
+                message: "✅ *BUILD PASSED* — ${env.JOB_NAME} #${env.BUILD_NUMBER}\n" +
+                         "Browser: ${params.WEB_BROWSER} | Tests: ${params.TEST_TYPE}\n" +
+                         "🔗 <${env.BUILD_URL}|View Build>"
+            )
+        }
+        failure {
+            slackSend(
+                channel: '#qa-demo',
+                color: 'danger',
+                message: "❌ *BUILD FAILED* — ${env.JOB_NAME} #${env.BUILD_NUMBER}\n" +
+                         "Browser: ${params.WEB_BROWSER} | Tests: ${params.TEST_TYPE}\n" +
+                         "🔗 <${env.BUILD_URL}|View Build>"
+            )
+        }
+        unstable {
+            slackSend(
+                channel: '#qa-demo',
+                color: 'warning',
+                message: "⚠️ *BUILD UNSTABLE* — ${env.JOB_NAME} #${env.BUILD_NUMBER}\n" +
+                         "Browser: ${params.WEB_BROWSER} | Tests: ${params.TEST_TYPE}\n" +
+                         "🔗 <${env.BUILD_URL}|View Build>"
+            )
+        }
     }
 }
