@@ -1,0 +1,31 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","99","test_scrolling_drop_down[chrome]","tests","2026-06-09","passed","2026-06-09","TestAutomationPractise","test_automation_practise","",""
+"","836","test_fill_data[chrome]","tests","2026-06-09","passed","2026-06-09","TestAutomationPractise","test_automation_practise","",""
+"
+Test for checking single file upload functionality
+:param page:
+:return:
+","175","test_upload_single_file[chrome]","tests","2026-06-09","passed","2026-06-09","TestAutomationPractise","test_automation_practise","",""
+"","1","test_get_all_posts","tests","2026-06-09","broken","2026-06-09","TestApi","test_api","",""
+"","0","test_update_post","tests","2026-06-09","broken","2026-06-09","TestApi","test_api","",""
+"","1","test_create_post","tests","2026-06-09","broken","2026-06-09","TestApi","test_api","",""
+"","0","test_get_single_post","tests","2026-06-09","broken","2026-06-09","TestApi","test_api","",""
+"","69","test_mouse_hover[chrome]","tests","2026-06-09","passed","2026-06-09","TestAutomationPractise","test_automation_practise","",""
+"","57","test_prompt_alert[chrome]","tests","2026-06-09","passed","2026-06-09","TestAutomationPractise","test_automation_practise","",""
+"
+Test alert button functionality
+:param page:
+:return:
+","114","test_alert_button[chrome]","tests","2026-06-09","passed","2026-06-09","TestAutomationPractise","test_automation_practise","",""
+"","82","test_login[chrome-admin-admin123]","tests","2026-06-09","passed","2026-06-09","TestAutomationPractise","test_automation_practise","",""
+"","1427","test_navigation[chrome]","tests","2026-06-09","passed","2026-06-09","TestAutomationPractise","test_automation_practise","",""
+"","35","test_price_of_product[chrome]","tests","2026-06-09","passed","2026-06-09","TestAutomationPractise","test_automation_practise","",""
+"
+Handle new tab
+opening and switching to it
+:param page:
+:return:
+","836","test_new_tab[chrome]","tests","2026-06-09","passed","2026-06-09","TestAutomationPractise","test_automation_practise","",""
+"","60","test_login[chrome-user-user123]","tests","2026-06-09","passed","2026-06-09","TestAutomationPractise","test_automation_practise","",""
+"","0","test_delete_post","tests","2026-06-09","broken","2026-06-09","TestApi","test_api","",""
+"","68","test_confirmation_alert[chrome]","tests","2026-06-09","passed","2026-06-09","TestAutomationPractise","test_automation_practise","",""
