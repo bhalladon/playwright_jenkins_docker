@@ -1,6 +1,6 @@
 # Playwright Test Automation Framework
 
-A Python-based test automation framework using **Playwright** with **UI** and **API** test coverage, integrated with **Jenkins**, **Docker**, and **GitHub Actions CI/CD**, with **Allure** reporting.
+A Python-based test automation framework using **Playwright** with **UI** and **API** test coverage, integrated with **Jenkins**, **Docker**, and **GitHub Actions CI/CD**, with **Allure** reporting and **Slack** notifications.
 
 ---
 
@@ -17,6 +17,7 @@ A Python-based test automation framework using **Playwright** with **UI** and **
 | Jenkins | CI/CD pipeline |
 | GitHub Actions | Cloud CI/CD |
 | python-dotenv | Environment config management |
+| Slack | Build notifications |
 
 ---
 
@@ -232,6 +233,18 @@ The `Jenkinsfile` defines a declarative pipeline with:
 **Post actions:**
 - Archives `screenshots/*.png` as build artifacts
 - Publishes Allure HTML report via the Allure Jenkins plugin
+- Sends Slack notification to `#qa-demo` — ✅ success, ❌ failure, ⚠️ unstable
+
+### Jenkins Slack Setup
+
+1. Install the **Slack Notification Plugin** — `Manage Jenkins → Plugins`
+2. Go to `Manage Jenkins → System → Slack`:
+   - Set your Slack **Workspace** name
+   - Add credential — Kind: `Secret text`, Secret: your `xoxb-...` Bot Token, ID: `slack-token`
+   - Set default channel: `#qa-demo`
+3. Invite the bot to your Slack channel: `/invite @<your-bot-name>`
+
+**Slack message includes:** job name, build number, browser, test type, and a direct link to the build.
 
 ---
 
@@ -253,9 +266,32 @@ Steps:
 6. Upload screenshots on failure as artifacts
 7. Generate Allure report
 8. Deploy Allure report to **GitHub Pages** (`gh-pages` branch), keeping last 20 reports
+9. Send Slack notification with build status, branch, browser, actor, and run URL
 
-> Set `APP_URL` as a GitHub repository secret for use in CI.
-> Set `API_BASE_URL` as a GitHub repository secret for use in CI.
+### GitHub Actions Slack Setup
+
+1. Go to https://api.slack.com/apps → select your app → **Incoming Webhooks** → toggle ON
+2. Click **"Add New Webhook to Workspace"** → select your channel → **Allow**
+3. Copy the webhook URL: `https://hooks.slack.com/services/T.../B.../xxx...`
+4. Validate the webhook locally before adding to GitHub:
+```bash
+curl -X POST -H 'Content-type: application/json' \
+  --data '{"text":"Hello from GitHub Actions!"}' \
+  https://hooks.slack.com/services/YOUR/WEBHOOK/URL
+```
+5. Add it as a GitHub repository secret:
+   - Repo → `Settings → Secrets and variables → Actions → New repository secret`
+   - Name: `SLACK_WEBHOOK_URL`, Value: your webhook URL
+
+**Required GitHub Secrets:**
+
+| Secret | Description |
+|---|---|
+| `APP_URL` | Target UI test URL |
+| `API_BASE_URL` | Target API base URL |
+| `SLACK_WEBHOOK_URL` | Slack Incoming Webhook URL for notifications |
+
+**Slack message includes:** build status, workflow name, branch, browser, triggered-by actor, and a direct link to the Actions run.
 
 ---
 
