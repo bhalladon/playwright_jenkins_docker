@@ -1,0 +1,4 @@
+
+Setting up for test: test_get_single_post
+Executing test: test_get_single_post
+Tearing down after test: test_get_single_post
