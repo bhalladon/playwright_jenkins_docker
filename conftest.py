@@ -6,17 +6,20 @@ from api.api_client import ApiClient
 
 load_dotenv()
 
+APP_URL = os.getenv("APP_URL")
+
 
 @pytest.fixture(scope="function")
 def page(browser, request):
     page = browser.new_page()
-    page.goto(os.getenv("APP_URL"))
+    page.goto(APP_URL)
     page.wait_for_load_state("networkidle")
     yield page
-    # Add screenshot feature on failed tests
-    if hasattr(request.node, "rep_call") and request.node.rep_call.failed:
-        page.screenshot(path=f"screenshots/{request.node.name}.png", full_page=True)
-    page.close()
+    try:
+        if hasattr(request.node, "rep_call") and request.node.rep_call.failed:
+            page.screenshot(path=f"screenshots/{request.node.name}.png", full_page=True)
+    finally:
+        page.close()
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
@@ -26,33 +29,25 @@ def pytest_runtest_makereport(item, call):
     setattr(item, f"rep_{rep.when}", rep)
 
 
-@pytest.fixture(scope="session", params=["chrome"])
-def browser(request):
-    # browser_name = request.param
-    browser_name = os.getenv("WEB_BROWSER")
+@pytest.fixture(scope="session")
+def browser():
+    browser_name = os.getenv("WEB_BROWSER", "chrome")
     headless = os.getenv("HEADLESS", "false").lower() == "true"
+    args = ["--start-maximized"]
+
+    browser_map = {
+        "chrome": lambda p: p.chromium.launch(headless=headless, channel="chrome", args=args),
+        "edge": lambda p: p.chromium.launch(headless=headless, channel="msedge", args=args),
+        "firefox": lambda p: p.firefox.launch(headless=headless, args=args),
+        "webkit": lambda p: p.webkit.launch(headless=headless, args=args),
+    }
 
     with sync_playwright() as p:
-        args = ["--start-maximized"]
-        if browser_name == "chrome":
-            browser = p.chromium.launch(headless=headless, channel="chrome", args=args)
-        elif browser_name == "edge":
-            browser = p.chromium.launch(headless=headless, channel="msedge", args=args)
-        elif browser_name == "webkit":  # Safari browser
-            browser = p.webkit.launch(headless=headless, args=args)
-        elif browser_name == "firefox":
-            browser = p.firefox.launch(headless=headless, args=args)
-        else:
-            browser = p.chromium.launch(headless=headless)
+        browser = browser_map.get(browser_name, lambda p: p.chromium.launch(headless=headless, args=args))(p)
         context = browser.new_context(no_viewport=True)
         context.set_default_timeout(30000)
         yield context
         context.close()
-
-
-@pytest.fixture(scope="function")
-def open_app_url(page):
-    page.goto(os.getenv("APP_URL"))
 
 
 @pytest.fixture(scope="function")
@@ -129,6 +124,7 @@ def pytest_collection_modifyitems(config, items):
         if "slow" in item.keywords.node.name and not config.getoption("--runslow"):
             print("Skipping Test")
             item.add_marker(pytest.mark.skip(reason="need --runslow option to run"))
+
 
 @pytest.fixture(scope="session")
 def api_client():
