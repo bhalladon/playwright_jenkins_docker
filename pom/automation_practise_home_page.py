@@ -97,7 +97,6 @@ def select_date_from_calendar(page, date_to_enter: str):
     page.locator(select_date_calendar.format(date)).click()
 
 
-
 def mouse_hover_over_element(page, element):
     """
     Hover over an element

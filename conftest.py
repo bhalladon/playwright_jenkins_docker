@@ -8,18 +8,21 @@ load_dotenv()
 
 APP_URL = os.getenv("APP_URL")
 
-
-@pytest.fixture(scope="function")
+@pytest.fixture()
 def page(browser, request):
     page = browser.new_page()
-    page.goto(APP_URL)
-    page.wait_for_load_state("networkidle")
     yield page
     try:
         if hasattr(request.node, "rep_call") and request.node.rep_call.failed:
             page.screenshot(path=f"screenshots/{request.node.name}.png", full_page=True)
     finally:
         page.close()
+
+
+@pytest.fixture()
+def navigate(page):
+    page.goto(APP_URL)
+    page.wait_for_load_state("networkidle")
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
@@ -29,7 +32,7 @@ def pytest_runtest_makereport(item, call):
     setattr(item, f"rep_{rep.when}", rep)
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture()
 def browser():
     browser_name = os.getenv("WEB_BROWSER", "chrome")
     headless = os.getenv("HEADLESS", "false").lower() == "true"

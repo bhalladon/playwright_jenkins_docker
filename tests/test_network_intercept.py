@@ -91,7 +91,7 @@ def test_modify_response_headers(page: Page):
 
     def handle_route(route):
         response = route.fetch()
-        modified_headers = {**response.headers, "x-custom-header": "my-custom-value", "content-language": "en-US"}
+        modified_headers = {**response.headers, "age": "1000", "x-custom-header": "my-custom-value", "content-language": "en-US"}
         route.fulfill(response=response, headers=modified_headers)
 
     page.route("*/**/api/v1/fruits", handle_route)
@@ -133,7 +133,11 @@ def test_replace_response(page:Page):
         )
 
     page.route("*/**/api/v1/fruits", handle_route)
-    page.goto("https://demo.playwright.dev/api-mocking/")
+    with page.expect_response("*/**/api/v1/fruits") as response_info:
+        page.goto("https://demo.playwright.dev/api-mocking/")
+    response = response_info.value.json()
+    assert response[0]["name"] == "Rajiv", f"Expected name was 'Rajiv' but actual name found in the response was \
+                                {response[0]['name']}"
     expect(page.get_by_text("Rajiv")).to_be_visible()
 
 

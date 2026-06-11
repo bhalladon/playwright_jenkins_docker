@@ -1,10 +1,12 @@
 import pytest
 
 from playwright.sync_api import expect
+
 from pom.automation_practise_home_page import *
 
 
 @pytest.mark.ui
+@pytest.mark.usefixtures("page","navigate")
 class TestAutomationPractise:
 
     @pytest.mark.usefixtures("login")
@@ -75,7 +77,7 @@ class TestAutomationPractise:
     def test_mouse_hover(self, page):
         mouse_hover_over_element(page, element=mouse_hover)
 
-    def test_scrolling_drop_down(self, page):
+    def test_scrolling_drop_down(self, page, navigate):
         page.locator(scrolling_drop_down).click()
         page.locator("//div[@id='dropdown']//following::div[@class='option' and .='Item 8']").click()
 
