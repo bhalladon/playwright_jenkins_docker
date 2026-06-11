@@ -1,0 +1,3 @@
+
+Setting up for test: test_new_tab
+Tearing down after test: test_new_tab
