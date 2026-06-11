@@ -33,8 +33,8 @@ def pytest_runtest_makereport(item, call):
 
 
 @pytest.fixture()
-def web_browser(request):
-    browser_name = os.getenv("WEB_BROWSER", "chrome") or request.config.getoption("--browser")
+def browser(request):
+    browser_name = os.getenv("WEB_BROWSER", "chrome") or request.config.getoption("--web_browser")
     headless = os.getenv("HEADLESS", "false").lower() == "true"
     args = ["--start-maximized"]
 
@@ -83,7 +83,7 @@ def pytest_addoption(parser):
         "--env", action="store", default="prod", help="Environment to run tests against (e.g., dev, staging, prod)"
     )
     parser.addoption(
-        "--browser", action="store", default="chrome", help="Browser to run tests against (e.g., chrome, firefox)"
+        "--web_browser", action="store", default="chrome", help="Browser to run tests against (e.g., chrome, firefox)"
     )
     parser.addoption(
         "--runslow", action="store", default="false", help="Environment to run tests against (e.g., dev, staging, prod)"

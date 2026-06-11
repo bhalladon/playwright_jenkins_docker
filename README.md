@@ -106,7 +106,7 @@ Set `WEB_BROWSER` in `.env`, pass it as an env variable, or use the `--web_brows
 ```bash
 WEB_BROWSER=firefox pytest tests/ -v
 # or
-pytest tests/ --browser=firefox -v
+pytest tests/ --web_browser=firefox -v
 ```
 Supported browsers: `chrome`, `firefox`, `edge`, `webkit`
 
@@ -200,21 +200,21 @@ Base URL is loaded from `API_BASE_URL` in `.env`.
 
 ## conftest.py — Fixtures & Hooks
 
-| Fixture / Hook                  | Scope | Description |
-|---------------------------------|---|---|
-| `web_browser`                   | session | Launches a browser context (chrome/firefox/edge/webkit), no viewport, 30s default timeout; reads from `WEB_BROWSER` env var or `--web_browser` CLI option |
-| `page`                          | function | Opens a new page, auto-screenshots on failure |
-| `navigate`                      | function | Navigates the current page to `APP_URL` and waits for `networkidle` |
-| `api_client`                    | session | Returns a shared `ApiClient` instance |
-| `login`                         | function | Stub fixture for login setup (prints credentials) |
-| `pytest_runtest_makereport`     | hook | Enables failure detection for screenshot capture |
-| `pytest_addoption`              | hook | Adds `--env`, `--web_browser`, and `--runslow` CLI options |
-| `pytest_configure`              | hook | Applies env-specific configuration based on `--env` value |
-| `pytest_sessionstart`           | hook | Called before test collection; used for global setup |
-| `pytest_sessionfinish`          | hook | Called after test run; used for global teardown |
-| `pytest_runtest_setup`          | hook | Called before each test |
-| `pytest_runtest_call`           | hook | Called during each test execution |
-| `pytest_runtest_teardown`       | hook | Called after each test |
+| Fixture / Hook              | Scope | Description |
+|-----------------------------|---|---|
+| `browser`                   | session | Launches a browser context (chrome/firefox/edge/webkit), no viewport, 30s default timeout; reads from `WEB_BROWSER` env var or `--web_browser` CLI option |
+| `page`                      | function | Opens a new page, auto-screenshots on failure |
+| `navigate`                  | function | Navigates the current page to `APP_URL` and waits for `networkidle` |
+| `api_client`                | session | Returns a shared `ApiClient` instance |
+| `login`                     | function | Stub fixture for login setup (prints credentials) |
+| `pytest_runtest_makereport` | hook | Enables failure detection for screenshot capture |
+| `pytest_addoption`          | hook | Adds `--env`, `--web_browser`, and `--runslow` CLI options |
+| `pytest_configure`          | hook | Applies env-specific configuration based on `--env` value |
+| `pytest_sessionstart`       | hook | Called before test collection; used for global setup |
+| `pytest_sessionfinish`      | hook | Called after test run; used for global teardown |
+| `pytest_runtest_setup`      | hook | Called before each test |
+| `pytest_runtest_call`       | hook | Called during each test execution |
+| `pytest_runtest_teardown`   | hook | Called after each test |
 | `pytest_collection_modifyitems` | hook | Skips tests marked `slow` unless `--runslow` is passed |
 
 ---
