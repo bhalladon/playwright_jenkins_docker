@@ -1,0 +1,5 @@
+
+Setting up for test: test_alert_button
+Executing test: test_alert_button
+Dialog message: I am an alert box!
+Tearing down after test: test_alert_button

@@ -1,0 +1,4 @@
+
+Setting up for test: test_get_all_posts
+Executing test: test_get_all_posts
+Tearing down after test: test_get_all_posts

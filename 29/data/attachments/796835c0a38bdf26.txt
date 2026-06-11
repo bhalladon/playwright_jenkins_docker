@@ -1,0 +1,4 @@
+
+Setting up for test: test_mouse_hover
+Executing test: test_mouse_hover
+Tearing down after test: test_mouse_hover
