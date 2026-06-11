@@ -33,8 +33,9 @@ playwright_jenkins_docker/
 │   └── automation_practise_home_page.py  # Page Object Model (locators + helpers)
 ├── screenshots/                 # Auto-captured screenshots on test failure
 ├── tests/
-│   ├── test_automation_practise.py  # UI tests
-│   └── test_api.py                  # API tests
+│   ├── test_automation_practise.py       # UI tests (class-based)
+│   ├── test_api.py                       # API tests
+│   └── test_network_intercept.py         # Network interception tests
 ├── .env                         # Local environment variables
 ├── conftest.py                  # pytest fixtures and hooks
 ├── Dockerfile                   # Docker image for containerized runs
@@ -63,10 +64,11 @@ playwright install chrome
 Create a `.env` file in the project root for local test execution:
 
 ```env
-WEB_BROWSER=chrome
-APP_URL=https://testautomationpractice.blogspot.com/
-HEADLESS=true
-API_BASE_URL=https://jsonplaceholder.typicode.com
+WEB_BROWSER="chrome"
+APP_URL="https://testautomationpractice.blogspot.com/"
+APP_URL_FOR_NETWORK_INTERCEPT_TESTS="https://demo.playwright.dev/api-mocking/" # For Testing network intercept
+HEADLESS="true"
+API_BASE_URL="https://jsonplaceholder.typicode.com"
 ```
 
 ---
@@ -88,6 +90,11 @@ pytest tests/ -m ui -v
 pytest tests/ -m api -v
 ```
 
+### Run only Network Intercept tests
+```bash
+pytest tests/ -m network_intercept -v
+```
+
 ### Run with Allure reporting
 ```bash
 pytest tests/ --alluredir=allure-results
@@ -95,9 +102,11 @@ allure serve allure-results
 ```
 
 ### Run with a specific browser
-Set `WEB_BROWSER` in `.env` or pass it as an env variable:
+Set `WEB_BROWSER` in `.env`, pass it as an env variable, or use the `--web_browser` CLI option:
 ```bash
 WEB_BROWSER=firefox pytest tests/ -v
+# or
+pytest tests/ --browser=firefox -v
 ```
 Supported browsers: `chrome`, `firefox`, `edge`, `webkit`
 
@@ -118,6 +127,7 @@ Defined in `pytest.ini`:
 | `api` | API tests |
 | `smoke` | Smoke test suite |
 | `e2e` | End-to-end test suite |
+| `network_intercept` | Network interception tests |
 
 ---
 
@@ -151,6 +161,18 @@ Target: https://jsonplaceholder.typicode.com
 | `test_update_post` | PUT /posts/1 — validates updated fields |
 | `test_delete_post` | DELETE /posts/1 — validates 200 OK |
 
+### Network Intercept Tests — `tests/test_network_intercept.py`
+Target: https://demo.playwright.dev/api-mocking/
+
+| Test | Description |
+|---|---|
+| `test_mock_network_request[continue]` | Lets the real API request proceed, asserts real data is rendered |
+| `test_mock_network_request[fulfill]` | Mocks API response with custom JSON, asserts mocked data is rendered |
+| `test_mock_network_request[abort]` | Aborts the API request, asserts UI shows loading/error state |
+| `test_mock_network_request_modify_headers` | Intercepts request and injects custom `authorization` and `user-agent` headers |
+| `test_modify_response_headers` | Fetches real response then re-fulfills it with modified response headers |
+| `test_replace_response` | Replaces entire API response with a static JSON payload |
+
 ---
 
 ## Page Object Model
@@ -178,14 +200,22 @@ Base URL is loaded from `API_BASE_URL` in `.env`.
 
 ## conftest.py — Fixtures & Hooks
 
-| Fixture / Hook | Scope | Description |
-|---|---|---|
-| `browser` | session | Launches browser (chrome/firefox/edge/webkit) |
-| `page` | function | Opens a new page, navigates to APP_URL, auto-screenshots on failure |
-| `api_client` | session | Returns a shared `ApiClient` instance |
-| `open_app_url` | function | Navigates to APP_URL |
-| `pytest_runtest_makereport` | hook | Enables failure detection for screenshot capture |
-| `pytest_addoption` | hook | Adds `--env` and `--runslow` CLI options |
+| Fixture / Hook                  | Scope | Description |
+|---------------------------------|---|---|
+| `web_browser`                   | session | Launches a browser context (chrome/firefox/edge/webkit), no viewport, 30s default timeout; reads from `WEB_BROWSER` env var or `--web_browser` CLI option |
+| `page`                          | function | Opens a new page, auto-screenshots on failure |
+| `navigate`                      | function | Navigates the current page to `APP_URL` and waits for `networkidle` |
+| `api_client`                    | session | Returns a shared `ApiClient` instance |
+| `login`                         | function | Stub fixture for login setup (prints credentials) |
+| `pytest_runtest_makereport`     | hook | Enables failure detection for screenshot capture |
+| `pytest_addoption`              | hook | Adds `--env`, `--web_browser`, and `--runslow` CLI options |
+| `pytest_configure`              | hook | Applies env-specific configuration based on `--env` value |
+| `pytest_sessionstart`           | hook | Called before test collection; used for global setup |
+| `pytest_sessionfinish`          | hook | Called after test run; used for global teardown |
+| `pytest_runtest_setup`          | hook | Called before each test |
+| `pytest_runtest_call`           | hook | Called during each test execution |
+| `pytest_runtest_teardown`       | hook | Called after each test |
+| `pytest_collection_modifyitems` | hook | Skips tests marked `slow` unless `--runslow` is passed |
 
 ---
 
