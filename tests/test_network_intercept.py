@@ -2,6 +2,7 @@ import pytest
 from playwright.sync_api import Page, expect
 
 
+@pytest.mark.network_intercept
 @pytest.mark.parametrize("action_to_take", ["continue", "fulfill", "abort"])
 def test_mock_network_request(page: Page, action_to_take):
     """
@@ -48,6 +49,7 @@ def test_mock_network_request(page: Page, action_to_take):
         expect(page.get_by_text("Loading")).to_be_visible()
 
 
+@pytest.mark.network_intercept
 def test_mock_network_request_modify_headers(page: Page):
     """
     Intercept and modify headers
@@ -78,6 +80,7 @@ def test_mock_network_request_modify_headers(page: Page):
     expect(page.get_by_text("Strawberry")).to_be_visible()
 
 
+@pytest.mark.network_intercept
 def test_modify_response_headers(page: Page):
     """
     Intercept and modify response headers
@@ -91,7 +94,8 @@ def test_modify_response_headers(page: Page):
 
     def handle_route(route):
         response = route.fetch()
-        modified_headers = {**response.headers, "age": "1000", "x-custom-header": "my-custom-value", "content-language": "en-US"}
+        modified_headers = {**response.headers, "age": "1000", "x-custom-header": "my-custom-value",
+                            "content-language": "en-US"}
         route.fulfill(response=response, headers=modified_headers)
 
     page.route("*/**/api/v1/fruits", handle_route)
@@ -106,7 +110,8 @@ def test_modify_response_headers(page: Page):
     expect(page.get_by_text("Strawberry")).to_be_visible()
 
 
-def test_replace_response(page:Page):
+@pytest.mark.network_intercept
+def test_replace_response(page: Page):
     """
     Intercept and replace the entire response
     This is useful for testing how your ui responds to different response bodies
@@ -120,6 +125,7 @@ def test_replace_response(page:Page):
     :param page:
     :return:
     """
+
     def handle_route(route):
         route.fulfill(
             status=200,
@@ -127,8 +133,8 @@ def test_replace_response(page:Page):
                 "content-type": "application/json"
             },
             json=[{
-                "name":"Rajiv",
-                "id":1
+                "name": "Rajiv",
+                "id": 1
             }]
         )
 
@@ -139,6 +145,3 @@ def test_replace_response(page:Page):
     assert response[0]["name"] == "Rajiv", f"Expected name was 'Rajiv' but actual name found in the response was \
                                 {response[0]['name']}"
     expect(page.get_by_text("Rajiv")).to_be_visible()
-
-
-

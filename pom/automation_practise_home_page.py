@@ -128,7 +128,8 @@ def get_price_from_the_table(page, product_name):
                 return price_of_product
         # Check if this is last page of the table or not
         # if yes then return from the function
-        if total_number_of_pages_in_table - i == 0:
+        if total_number_of_pages_in_table - i == 1:
+            print("Product not found in the table")
             return None
         # navigate to next page of the table
         page.locator(f"//ul[@id='pagination']//child::li//a[.='{i + 1}']").click()

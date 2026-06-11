@@ -12,6 +12,7 @@ allure-pytest = "~=2.16.0"
 requests = "~=2.34.2"
 playwright = "~=1.60.0"
 pytest-xdist = "~=3.6.1"
+pylint = ">=3.0"
 
 [dev-packages]
 
