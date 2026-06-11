@@ -1,0 +1,101 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"
+:param page:
+:param action_to_take: pass a value here for the network interception to take
+example values are : continue, fulfill, abort
+and the default is continued which will just let the request happen as normal
+the action_to_take can be useful for testing how your UI handles slow loading or error states
+for example pass action_to_take=""abort"" to see how your ui responds to failed api calls
+and pass action_to_take=""fulfill"" to mock the return data from an api
+and pass action_to_take=""continue"" to let the api call happen as normal
+
+:return:
+","131","test_mock_network_request[abort]","tests","2026-06-11","passed","2026-06-11","","test_network_intercept","",""
+"","135","test_get_all_posts","tests","2026-06-11","passed","2026-06-11","TestApi","test_api","",""
+"","80","test_confirmation_alert","tests","2026-06-11","passed","2026-06-11","TestAutomationPractise","test_automation_practise","",""
+"","171","test_update_post","tests","2026-06-11","passed","2026-06-11","TestApi","test_api","",""
+"","53","test_create_post","tests","2026-06-11","passed","2026-06-11","TestApi","test_api","",""
+"","845","test_fill_data","tests","2026-06-11","passed","2026-06-11","TestAutomationPractise","test_automation_practise","",""
+"
+Intercept and modify response headers
+This is useful for testing how your ui responds to different content types
+or different languages
+or different content encodings
+or any other response properties that are sent with the response
+:param page:
+:return:
+","615","test_modify_response_headers","tests","2026-06-11","passed","2026-06-11","","test_network_intercept","",""
+"","97","test_delete_post","tests","2026-06-11","passed","2026-06-11","TestApi","test_api","",""
+"
+Test for checking single file upload functionality
+:param page:
+:return:
+","33","test_upload_single_file","tests","2026-06-11","passed","2026-06-11","TestAutomationPractise","test_automation_practise","",""
+"","66","test_get_single_post","tests","2026-06-11","passed","2026-06-11","TestApi","test_api","",""
+"
+Intercept and modify headers
+This is useful for testing authentication flows
+or modifying the user agent etc
+or testing mobile vs desktop views
+or testing how your ui responds to different content types
+or testing how your ui responds to different languages
+or testing how your ui responds to different content encodings
+or any other request properties that are sent with the request
+:param page:
+:return:
+","170","test_mock_network_request_modify_headers","tests","2026-06-11","passed","2026-06-11","","test_network_intercept","",""
+"","85","test_login[admin-admin123]","tests","2026-06-11","passed","2026-06-11","TestAutomationPractise","test_automation_practise","",""
+"","58","test_login[user-user123]","tests","2026-06-11","passed","2026-06-11","TestAutomationPractise","test_automation_practise","",""
+"
+Handle new tab
+opening and switching to it
+:param page:
+:return:
+","1218","test_new_tab","tests","2026-06-11","passed","2026-06-11","TestAutomationPractise","test_automation_practise","",""
+"
+Intercept and replace the entire response
+This is useful for testing how your ui responds to different response bodies
+or different status codes
+or different response headers
+or any other response properties that are sent with the response
+or replacing a response with a file
+or replacing a response with a static json response
+or replacing a response with a mock response
+or replacing a response with a response that has a different content type
+:param page:
+:return:
+","160","test_replace_response","tests","2026-06-11","passed","2026-06-11","","test_network_intercept","",""
+"
+:param page:
+:param action_to_take: pass a value here for the network interception to take
+example values are : continue, fulfill, abort
+and the default is continued which will just let the request happen as normal
+the action_to_take can be useful for testing how your UI handles slow loading or error states
+for example pass action_to_take=""abort"" to see how your ui responds to failed api calls
+and pass action_to_take=""fulfill"" to mock the return data from an api
+and pass action_to_take=""continue"" to let the api call happen as normal
+
+:return:
+","365","test_mock_network_request[continue]","tests","2026-06-11","passed","2026-06-11","","test_network_intercept","",""
+"","39","test_price_of_product","tests","2026-06-11","passed","2026-06-11","TestAutomationPractise","test_automation_practise","",""
+"
+:param page:
+:param action_to_take: pass a value here for the network interception to take
+example values are : continue, fulfill, abort
+and the default is continued which will just let the request happen as normal
+the action_to_take can be useful for testing how your UI handles slow loading or error states
+for example pass action_to_take=""abort"" to see how your ui responds to failed api calls
+and pass action_to_take=""fulfill"" to mock the return data from an api
+and pass action_to_take=""continue"" to let the api call happen as normal
+
+:return:
+","211","test_mock_network_request[fulfill]","tests","2026-06-11","passed","2026-06-11","","test_network_intercept","",""
+"","107","test_scrolling_drop_down","tests","2026-06-11","passed","2026-06-11","TestAutomationPractise","test_automation_practise","",""
+"","1070","test_navigation","tests","2026-06-11","passed","2026-06-11","TestAutomationPractise","test_automation_practise","",""
+"
+Test alert button functionality
+:param page:
+:return:
+","126","test_alert_button","tests","2026-06-11","passed","2026-06-11","TestAutomationPractise","test_automation_practise","",""
+"","70","test_mouse_hover","tests","2026-06-11","passed","2026-06-11","TestAutomationPractise","test_automation_practise","",""
+"","65","test_prompt_alert","tests","2026-06-11","passed","2026-06-11","TestAutomationPractise","test_automation_practise","",""
