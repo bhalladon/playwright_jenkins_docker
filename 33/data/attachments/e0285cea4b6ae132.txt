@@ -1,0 +1,5 @@
+
+Setting up for test: test_price_of_product
+Executing test: test_price_of_product
+Price of Mobile is: $5.99
+Tearing down after test: test_price_of_product

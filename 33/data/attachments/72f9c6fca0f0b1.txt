@@ -1,0 +1,4 @@
+
+Setting up for test: test_delete_post
+Executing test: test_delete_post
+Tearing down after test: test_delete_post
