@@ -1,0 +1,5 @@
+
+Setting up for test: test_login[admin-admin123]
+login successful with admin admin123
+Executing test: test_login[admin-admin123]
+Tearing down after test: test_login[admin-admin123]

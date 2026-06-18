@@ -1,0 +1,4 @@
+
+Setting up for test: test_prompt_alert
+Executing test: test_prompt_alert
+Tearing down after test: test_prompt_alert
