@@ -105,7 +105,8 @@ jobs:
                     { "title": "Branch", "value": "${{ github.ref_name }}", "short": true },
                     { "title": "Browser", "value": "${{ github.event.inputs.WEB_BROWSER || 'chrome' }}", "short": true },
                     { "title": "Triggered by", "value": "${{ github.actor }}", "short": true },
-                    { "title": "Run URL", "value": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" }
+                    { "title": "Run URL", "value": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" },
+                    { "title": "Allure Report", "value": "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ github.run_number }}/" }
                   ]
                 }
               ]
