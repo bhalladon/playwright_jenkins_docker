@@ -1,0 +1,101 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","106","test_scrolling_drop_down","tests","2026-06-21","passed","2026-06-21","TestAutomationPractise","test_automation_practise","",""
+"","34","test_update_post","tests","2026-06-21","passed","2026-06-21","TestApi","test_api","",""
+"
+Intercept and modify headers
+This is useful for testing authentication flows
+or modifying the user agent etc
+or testing mobile vs desktop views
+or testing how your ui responds to different content types
+or testing how your ui responds to different languages
+or testing how your ui responds to different content encodings
+or any other request properties that are sent with the request
+:param page:
+:return:
+","137","test_mock_network_request_modify_headers","tests","2026-06-21","passed","2026-06-21","TestNetworkIntercept","test_network_intercept","",""
+"","19","test_create_post","tests","2026-06-21","passed","2026-06-21","TestApi","test_api","",""
+"","14","test_get_single_post","tests","2026-06-21","passed","2026-06-21","TestApi","test_api","",""
+"
+Test alert button functionality
+:param page:
+:return:
+","231","test_alert_button","tests","2026-06-21","passed","2026-06-21","TestAutomationPractise","test_automation_practise","",""
+"","40","test_price_of_product","tests","2026-06-21","passed","2026-06-21","TestAutomationPractise","test_automation_practise","",""
+"
+Intercept and replace the entire response
+This is useful for testing how your ui responds to different response bodies
+or different status codes
+or different response headers
+or any other response properties that are sent with the response
+or replacing a response with a file
+or replacing a response with a static json response
+or replacing a response with a mock response
+or replacing a response with a response that has a different content type
+:param page:
+:return:
+","127","test_replace_response","tests","2026-06-21","passed","2026-06-21","TestNetworkIntercept","test_network_intercept","",""
+"
+Handle new tab
+opening and switching to it
+:param page:
+:return:
+","1271","test_new_tab","tests","2026-06-21","passed","2026-06-21","TestAutomationPractise","test_automation_practise","",""
+"
+Intercept and modify response headers
+This is useful for testing how your ui responds to different content types
+or different languages
+or different content encodings
+or any other response properties that are sent with the response
+:param page:
+:return:
+","559","test_modify_response_headers","tests","2026-06-21","passed","2026-06-21","TestNetworkIntercept","test_network_intercept","",""
+"","1959","test_navigation","tests","2026-06-21","passed","2026-06-21","TestAutomationPractise","test_automation_practise","",""
+"
+:param page:
+:param action_to_take: pass a value here for the network interception to take
+example values are : continue, fulfill, abort
+and the default is continued which will just let the request happen as normal
+the action_to_take can be useful for testing how your UI handles slow loading or error states
+for example pass action_to_take=""abort"" to see how your ui responds to failed api calls
+and pass action_to_take=""fulfill"" to mock the return data from an api
+and pass action_to_take=""continue"" to let the api call happen as normal
+
+:return:
+","311","test_mock_network_request[continue]","tests","2026-06-21","passed","2026-06-21","TestNetworkIntercept","test_network_intercept","",""
+"","142","test_get_all_posts","tests","2026-06-21","passed","2026-06-21","TestApi","test_api","",""
+"
+:param page:
+:param action_to_take: pass a value here for the network interception to take
+example values are : continue, fulfill, abort
+and the default is continued which will just let the request happen as normal
+the action_to_take can be useful for testing how your UI handles slow loading or error states
+for example pass action_to_take=""abort"" to see how your ui responds to failed api calls
+and pass action_to_take=""fulfill"" to mock the return data from an api
+and pass action_to_take=""continue"" to let the api call happen as normal
+
+:return:
+","106","test_mock_network_request[fulfill]","tests","2026-06-21","passed","2026-06-21","TestNetworkIntercept","test_network_intercept","",""
+"","1005","test_fill_data","tests","2026-06-21","passed","2026-06-21","TestAutomationPractise","test_automation_practise","",""
+"","16","test_delete_post","tests","2026-06-21","passed","2026-06-21","TestApi","test_api","",""
+"","101","test_login[admin-admin123]","tests","2026-06-21","passed","2026-06-21","TestAutomationPractise","test_automation_practise","",""
+"","74","test_mouse_hover","tests","2026-06-21","passed","2026-06-21","TestAutomationPractise","test_automation_practise","",""
+"","75","test_prompt_alert","tests","2026-06-21","passed","2026-06-21","TestAutomationPractise","test_automation_practise","",""
+"","74","test_confirmation_alert","tests","2026-06-21","passed","2026-06-21","TestAutomationPractise","test_automation_practise","",""
+"
+Test for checking single file upload functionality
+:param page:
+:return:
+","36","test_upload_single_file","tests","2026-06-21","passed","2026-06-21","TestAutomationPractise","test_automation_practise","",""
+"","61","test_login[user-user123]","tests","2026-06-21","passed","2026-06-21","TestAutomationPractise","test_automation_practise","",""
+"
+:param page:
+:param action_to_take: pass a value here for the network interception to take
+example values are : continue, fulfill, abort
+and the default is continued which will just let the request happen as normal
+the action_to_take can be useful for testing how your UI handles slow loading or error states
+for example pass action_to_take=""abort"" to see how your ui responds to failed api calls
+and pass action_to_take=""fulfill"" to mock the return data from an api
+and pass action_to_take=""continue"" to let the api call happen as normal
+
+:return:
+","110","test_mock_network_request[abort]","tests","2026-06-21","passed","2026-06-21","TestNetworkIntercept","test_network_intercept","",""
